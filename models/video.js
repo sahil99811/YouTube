@@ -1,0 +1,61 @@
+const mongoose=require('mongoose')
+
+const videoSchema=new mongoose.Schema({
+    userId:{
+        type:mongoose.Schema.ObjectId,
+        ref:"User",
+        required:true
+    },
+    title:{
+        type:String,
+        required:true
+    },
+    desc:{
+        type:String,
+        required:true
+    },
+    thumbnail:{
+        type:String,
+        // required:true
+    },
+    videoUrl:{
+        type:String,
+        required:true
+    },
+    imgUrl:{
+        type:String,
+        required:true
+    },
+    views:{
+        type:Number,
+        default:0
+    },
+    likes:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"User"
+        }
+    ],
+    dislikes:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"User"
+        }
+    ],
+    tags:{
+        type:[String],
+        default:[],
+    },
+    comment:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Comment"
+        }
+    ]
+},
+{
+    timestamps:true
+}
+)
+
+module.exports=mongoose.model("Video",videoSchema);
